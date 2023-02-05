@@ -1,0 +1,186 @@
+[service]
+golangci-lint-version =  "1.50.1"
+
+[run]
+timeout = "10m"
+
+[linters]
+disable-all = true
+enable = [
+    # "asasalint",
+    "asciicheck",
+    "bidichk",
+    "bodyclose",
+    "containedctx",
+    # "contextcheck", # checks the function whether use a non-inherited context # TODO: enable after golangci-lint uses https://github.com/sylvia7788/contextcheck/releases/tag/v1.0.7
+    "cyclop",
+    # "deadcode", deprecated
+    "decorder",
+    "depguard",
+    "dogsled",
+    "dupl",
+    "dupword",
+    "durationcheck",
+    "errcheck",
+    "errchkjson",
+    "errname",
+    "errorlint",
+    "execinquery",
+    "exhaustive",
+    # "exhaustivestruct", deprecated
+    # "exhaustruct", quite difficult to enable for partial struct init
+    "exportloopref",
+    "forbidigo",
+    "forcetypeassert",
+    # "funlen", the complexity is covering most of issues
+    # "gci", it's hard to make gofumpt play well with gci
+    "gochecknoglobals",
+    "gochecknoinits",
+    "gocognit",
+    "goconst",
+    "gocritic",
+    "gocyclo",
+    # "godot", the dot is not always easy to add (multiline for ex)
+    "godox",
+    "goerr113",
+    "gofmt",
+    # "gofumpt",
+    "goheader",
+    "goimports",
+    # "golint", deprecated
+    "gomnd",
+    "gomoddirectives",
+    "gomodguard",
+    "goprintffuncname",
+    "gosec",
+    "gosimple",
+    "govet",
+    "grouper",
+    # "ifshort", decprecated
+    "importas",
+    "ineffassign",
+    "interfacebloat",
+    # "interfacer", deprecated
+    "ireturn",
+    "lll",
+    "loggercheck",
+    "maintidx",
+    "makezero",
+    # "maligned", deprecated
+    "misspell",
+    "nakedret",
+    "nestif",
+    "nilerr",
+    "nilnil",
+    "nlreturn",
+    "noctx",
+    "nolintlint",
+    "nonamedreturns",
+    "nosprintfhostport",
+    "paralleltest",
+    # "prealloc",
+    "predeclared",
+    "promlinter",
+    "reassign",
+    "revive",
+    "rowserrcheck",
+    # "scopelint" , deprecated
+    "sqlclosecheck",
+    "staticcheck",
+    # "structcheck", deprecated
+    "stylecheck",
+    # "tagliatelle", we don't want to force tags on all structs
+    "tenv",
+    "testableexamples",
+    # "testpackage", we don't want to force the use of a test package
+    "thelper",
+    "tparallel",
+    "typecheck",
+    "unconvert",
+    "unparam",
+    "unused",
+    "usestdlibvars",
+    # "varcheck", deprecated
+    "varnamelen",
+    "wastedassign",
+    "whitespace",
+    "wrapcheck",
+    "wsl",
+]
+
+[linters-settings.errcheck]
+check-type-assertions = true
+check-blank = true
+
+[linters-settings.govet]
+check-shadowing = true
+enable-all = true
+disable = [
+    "fieldalignment"
+]
+
+[linters-settings.varnamelen]
+min-name-length = 1
+
+[linters-settings.cyclop]
+max-complexity = 15
+
+[linters-settings.revive]
+min-confidence = 0.0
+
+  [[linters-settings.revive.rules]]
+  name = "unexported-return"
+  Disabled = true
+
+[linters-settings.prealloc]
+simple = false
+range-loops = true
+for-loops = true
+
+[linters-settings.gocritic]
+enabled-tags = [
+    "diagnostic",
+    "experimental",
+    "opinionated",
+    "performance",
+    "style",
+]
+disabled-checks = [
+    "whyNoLint",
+]
+
+[linters-settings.errorlint]
+errorf = true
+
+[linters-settings.nolintlint]
+require-explanation = true
+require-specific = true
+
+[linters-settings.gofumpt]
+extra-rules = true
+
+[[issues.exclude-rules]]
+path = '(.+)_test\.go'
+linters = [
+    "funlen",
+    "goconst",
+    "interfacer",
+    "dupl",
+    "lll",
+    "goerr113",
+    "varnamelen",
+    "errcheck",
+    "gocritic",
+    "cyclop",
+    "wrapcheck",
+    "gocognit",
+    "contextcheck",
+]
+
+[[issues.exclude-rules]]
+text = "shadow: declaration of \"err\" shadows declaration"
+linters = [ "govet" ]
+
+[issues]
+new = true
+new-from-rev = "d3c3546"
