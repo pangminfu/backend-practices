@@ -1,8 +1,9 @@
 package repository
 
 import (
-	"backend-practices/internal/domain/todo"
 	"context"
+
+	"backend-practices/internal/domain/todo"
 )
 
 type TodoRepo interface {
